@@ -20,7 +20,7 @@ const getAnimais = (request, response) => {
 }
 
 const addAnimal = (request, response) => {
-    const {numero, descricao, capacidade, predio} = request.body;
+    const {nome, tipo, idade, cliente} = request.body;
     pool.query(`insert into animais (nome, tipo, idade, cliente) 
     values ($1, $2, $3, $4)
     returning codigo, nome, tipo, idade, cliente`, 
