@@ -92,3 +92,7 @@ const getAnimalPorCodigo = (request, response) => {
         response.status(200).json(results.rows[0]);
     })
 }
+
+module.exports = {
+    getAnimais, addAnimal, updateAnimal, deleteAnimal, getAnimalPorCodigo
+}

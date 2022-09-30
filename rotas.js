@@ -19,7 +19,7 @@ rotas.route('/animais')
      .post(controleAnimais.addAnimal)
      .put(controleAnimais.updateAnimal)
   
-  rotas.route('/animais/:codigo')
+rotas.route('/animais/:codigo')
      .get(controleAnimais.getAnimalPorCodigo)
      .delete(controleAnimais.deleteAnimal)
 
