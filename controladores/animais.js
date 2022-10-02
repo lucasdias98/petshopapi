@@ -4,9 +4,12 @@ const { request, response } = require("express");
 const getAnimais = (request, response) => {
     pool.query(`select a.codigo as codigo, a.nome as nome, 
         a.tipo as tipo, a.idade as idade, 
-        a.cliente as cliente, c.nome as nomecliente
+        a.codigo_cliente as codigo_cliente,
+        a.tipo as tipo, c.nome as nomecliente,
+        t.nome as nometipo
         from animais a
-        join clientes c on a.cliente = c.codigo
+        join clientes c on a.codigo_cliente = c.codigo
+        join tipos t on a.tipo = t.codigo
         order by a.codigo`, 
     (error, results) => {
         if (error){
@@ -20,11 +23,11 @@ const getAnimais = (request, response) => {
 }
 
 const addAnimal = (request, response) => {
-    const {nome, tipo, idade, cliente} = request.body;
-    pool.query(`insert into animais (nome, tipo, idade, cliente) 
+    const {nome, idade, cliente, tipo} = request.body;
+    pool.query(`insert into animais (nome, idade, codigo_cliente, tipo) 
     values ($1, $2, $3, $4)
-    returning codigo, nome, tipo, idade, cliente`, 
-    [nome, tipo, idade, cliente] , 
+    returning codigo, nome, idade, codigo_cliente, tipo`, 
+    [nome, idade, cliente, tipo] , 
     (error, results) => {
         if (error){
             return response.status(400).json({
@@ -42,10 +45,10 @@ const addAnimal = (request, response) => {
 const updateAnimal = (request, response) => {
     const {codigo, nome, tipo, idade, cliente} = request.body;
     pool.query(`UPDATE animais
-	SET nome=$1, tipo=$2, idade=$3, cliente=$4
+	SET nome=$1, idade=$2, codigo_cliente=$3, tipo=$4
 	WHERE codigo=$5
-returning codigo, nome, tipo, idade, cliente`, 
-    [nome, tipo, idade, cliente, codigo] , 
+returning codigo, nome, idade, codigo_cliente, tipo`, 
+    [nome, idade, cliente, codigo, tipo] , 
     (error, results) => {
         if (error){
             return response.status(400).json({
