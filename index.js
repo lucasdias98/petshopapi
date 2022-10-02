@@ -10,7 +10,5 @@ app.use(cors());
 app.use(rotas);
 
 app.listen(process.env.PORT || 3002, () => {
-    console.log('Servidor da API rodando..........');
+    console.log('Servidor da API rodando...');
 });
-
-//antibug master
