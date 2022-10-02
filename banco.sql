@@ -15,22 +15,21 @@ create table animais (
 );
 
 insert into clientes (codigo, nome, telefone)
-values(1, 'Joãozinho', '40028922')
-returning codigo, nome, telefone;
+values(1, 'Joãozinho', '40028922');
+
 
 insert into clientes (codigo, nome, telefone)
-values(2, 'Pedro', '3311-9090')
-returning codigo, nome, telefone;
+values(2, 'Pedro', '3311-9090');
 
-
+/*
 insert into clientes (codigo, nome, telefone)
 values(3, 'Henrique', '3311-9018')
 returning codigo, nome, telefone;
-
+*/
 insert into tipos (codigo, nome)
-values(1, 'cachorro')
-returning codigo, nome;
+values(1, 'cachorro');
 
+/*
 insert into tipos (codigo, nome)
 values(2, 'gato')
 returning codigo, nome;
@@ -38,12 +37,12 @@ returning codigo, nome;
 insert into tipos (codigo, nome)
 values(3, 'macaco')
 returning codigo, nome;
-
+*/
 insert into animais (codigo, nome, idade, codigo_cliente, tipo)
-values(1, 'pikachu', 2, 1, 1)
-returning codigo, nome, idade, codigo_cliente, tipo;
+values(1, 'pikachu', 2, 1, 1);
+/*
 
 insert into animais (codigo, nome, idade, codigo_cliente, tipo)
 values(2, 'thor', 3, 1, 1)
 returning codigo, nome, idade, codigo_cliente, tipo;
-
+*/
