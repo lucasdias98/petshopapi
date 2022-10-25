@@ -3,34 +3,38 @@ const { Router } = require('express');
 const controleClientes = require('./controladores/clientes');
 const controleAnimais = require("./controladores/animais");
 const controleTipos = require("./controladores/tipos");
+const seguranca = require('./controladores/seguranca');
 
 const rotas = new Router();
 
+rotas.route("/login")
+     .post(seguranca.login)
+
 rotas.route('/clientes')
-     .get(controleClientes.getClientes)
-     .post(controleClientes.addCliente)
-     .put(controleClientes.updateCliente)
+     .get(seguranca.verificaJWT, controleClientes.getClientes)
+     .post(seguranca.verificaJWT, controleClientes.addCliente)
+     .put(seguranca.verificaJWT, controleClientes.updateCliente)
 
 rotas.route('/clientes/:codigo')
-     .get(controleClientes.getClientePorCodigo)
-     .delete(controleClientes.deleteCliente)
+     .get(seguranca.verificaJWT, controleClientes.getClientePorCodigo)
+     .delete(seguranca.verificaJWT, controleClientes.deleteCliente)
 
 rotas.route('/animais')
-     .get(controleAnimais.getAnimais)
-     .post(controleAnimais.addAnimal)
-     .put(controleAnimais.updateAnimal)
+     .get(seguranca.verificaJWT, controleAnimais.getAnimais)
+     .post(seguranca.verificaJWT, controleAnimais.addAnimal)
+     .put(seguranca.verificaJWT, controleAnimais.updateAnimal)
   
 rotas.route('/animais/:codigo')
-     .get(controleAnimais.getAnimalPorCodigo)
-     .delete(controleAnimais.deleteAnimal)
+     .get(seguranca.verificaJWT, controleAnimais.getAnimalPorCodigo)
+     .delete(seguranca.verificaJWT, controleAnimais.deleteAnimal)
 
 rotas.route('/tipos')
-     .get(controleTipos.getTipos)
-     .post(controleTipos.addTipo)
-     .put(controleTipos.updateTipo)
+     .get(seguranca.verificaJWT, controleTipos.getTipos)
+     .post(seguranca.verificaJWT, controleTipos.addTipo)
+     .put(seguranca.verificaJWT, controleTipos.updateTipo)
 
 rotas.route('/tipos/:codigo')
-     .get(controleTipos.getTipoPorCodigo)
-     .delete(controleTipos.deleteTipo)
+     .get(seguranca.verificaJWT, controleTipos.getTipoPorCodigo)
+     .delete(seguranca.verificaJWT, controleTipos.deleteTipo)
 
 module.exports = rotas;
