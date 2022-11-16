@@ -10,6 +10,7 @@ const rotas = new Router();
 rotas.route("/login")
      .post(seguranca.login)
 
+/*
 rotas.route('/clientes')
      .get(seguranca.verificaJWT, controleClientes.getClientes)
      .post(seguranca.verificaJWT, controleClientes.addCliente)
@@ -18,6 +19,16 @@ rotas.route('/clientes')
 rotas.route('/clientes/:codigo')
      .get(seguranca.verificaJWT, controleClientes.getClientePorCodigo)
      .delete(seguranca.verificaJWT, controleClientes.deleteCliente)
+*/
+
+rotas.route('/clientes')
+     .get(controleClientes.getClientes)
+     .post(controleClientes.addCliente)
+     .put(controleClientes.updateCliente)
+
+rotas.route('/clientes/:codigo')
+     .get(controleClientes.getClientePorCodigo)
+     .delete(controleClientes.deleteCliente)
 
 rotas.route('/animais')
      .get(seguranca.verificaJWT, controleAnimais.getAnimais)
